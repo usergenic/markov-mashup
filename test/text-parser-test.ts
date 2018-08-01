@@ -11,6 +11,6 @@ describe('TextParser', () => {
     expect(sentences[0]).to.deep.equal([
       'Once', 'upon', 'a', 'time', 'there', 'was', 'a', 'cat.'
     ]);
-    expect(sentences[1]).to.deep.equal(['It', 'was', 'a', 'great', 'cat.'])
+    expect(sentences[1]).to.deep.equal([ 'It', 'was', 'a', 'great', 'cat.' ])
   });
 });

@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "A markov-chain-based text-generator featuring explicit source-matter crossover options.",
   "main": "index.js",
-  "bin": "./cli.js",
+  "bin": "cli-bin.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && echo '#!/usr/bin/env node' > cli-bin.js && cat cli.js >> cli-bin.js",
     "clean": "rm *.js test/*.js",
     "format": "find . -iname \"*.ts\" -o -iname \"*.js\" | grep -v node_modules | xargs clang-format --style=file -i",
     "test": "mocha",

@@ -1,5 +1,6 @@
 .editorconfig
 .gitignore
 ./test
+*.tgz
 default.profraw
 tsconfig.json

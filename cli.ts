@@ -24,6 +24,10 @@ for (const sourceFileName of sourceFileNames) {
 const sentences = [];
 while (sentences.length < sentencesToGenerate) {
   const sentence = generator.generateSentence();
+  const uniqueSources = [...new Set(sentence.sources) ];
+  if (uniqueSources.length < sourceFileNames.length) {
+    continue;
+  }
   sentences.push(sentence);
-  console.log(sentence);
+  console.log(sentence.sentence);
 }

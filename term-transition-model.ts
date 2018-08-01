@@ -23,8 +23,8 @@ export class TermTransitionModel {
   }
   addTransition(from: string, to: string) {
     from = this.simplifyKey(from);
-    this.transitions.has(from) ? this.transitions.get(from)!.push(to) :
-                                 this.transitions.set(from, [to]);
+    this.transitions.has(from) ? this.transitions.get(from)!.push(to)
+                               : this.transitions.set(from, [ to ]);
   }
   getTransitions(from: string): string[]|undefined {
     return this.transitions.get(this.simplifyKey(from));

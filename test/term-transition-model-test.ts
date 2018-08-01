@@ -10,7 +10,7 @@ describe('TermTransitionModel', () => {
     const sentences =
         parser.parse('The quick brown fox jumped over the lazy dog.');
     ttm.addSentences(sentences);
-    expect(ttm.getTransitions('quick brown')).to.deep.equal(['fox']);
+    expect(ttm.getTransitions('quick brown')).to.deep.equal([ 'fox' ]);
     expect(ttm.getTransitions('quick black')).to.equal(undefined);
     expect(ttm.getTransitions('quick')).to.equal(undefined);
   });
@@ -25,8 +25,8 @@ describe('TermTransitionModel', () => {
     expect(ttm.getTransitions('quick brown')).to.equal(undefined);
     expect(ttm.getTransitions('quick black')).to.equal(undefined);
     expect(ttm.getTransitions('quick')).to.equal(undefined);
-    expect(ttm.getTransitions('the quick brown')).to.deep.equal(['fox']);
+    expect(ttm.getTransitions('the quick brown')).to.deep.equal([ 'fox' ]);
     expect(ttm.getTransitions('the quick black')).to.equal(undefined);
-    expect(ttm.getTransitions('the quick')).to.deep.equal(['brown']);
+    expect(ttm.getTransitions('the quick')).to.deep.equal([ 'brown' ]);
   });
 });
