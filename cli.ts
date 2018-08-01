@@ -10,6 +10,7 @@ const argv = minimist(process.argv.slice(2));
 const sentencesToGenerate = argv.sentences || 10;
 const sourceFileNames = argv._;
 const depth = argv.depth ? parseInt(argv.depth) : 2;
+const minRunLength = argv.minrun ? parseInt(argv.minrun) : 3;
 const generator = new TextGenerator();
 const parser = new TextParser();
 
