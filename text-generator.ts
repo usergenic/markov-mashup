@@ -8,15 +8,15 @@ export class TextGenerator {
   public minRunLength: number = 3;
   getSourceKeys() {}
   pickSource(): TermTransitionModel {
-    const sourceKeys = [...this.sources.keys() ];
+    const sourceKeys = [...this.sources.keys()];
     if (sourceKeys.length < 1) {
       throw new Error('No sources to pick from.');
     }
     const sourceKey = sourceKeys[Math.floor(sourceKeys.length * this.random())];
     return this.sources.get(sourceKey)!;
   }
-  generateSentence(): {sentence: string, sources: string[]} {
-    const sourceKeys = [...this.sources.keys() ];
+  generateSentence(): {sentence: string[], sources: string[]} {
+    const sourceKeys = [...this.sources.keys()];
     const sourceSequence = [];
     let sentence = [];
     let sourceKey = this.pickOne(sourceKeys);
@@ -29,8 +29,9 @@ export class TextGenerator {
       const from = sentence.slice(-source.depth).join(' ');
       const candidateSourceKeys =
           sourceKeys
-              .filter((sourceKey) =>
-                          !!this.sources.get(sourceKey)!.getTransitions(from))
+              .filter(
+                  (sourceKey) =>
+                      !!this.sources.get(sourceKey)!.getTransitions(from))
               .sort(() => Math.floor(this.random() * 2) - 1)
               // This sort puts the current source at the end of the candidate
               // set so we prefer source switch.
@@ -38,9 +39,9 @@ export class TextGenerator {
       if (candidateSourceKeys.length === 0) {
         break;
       }
-      const nextSourceKey = sourceRunLength < this.minRunLength
-                                ? candidateSourceKeys.pop()!
-                                : candidateSourceKeys.shift()!;
+      const nextSourceKey = sourceRunLength < this.minRunLength ?
+          candidateSourceKeys.pop()! :
+          candidateSourceKeys.shift()!;
       if (sourceKey !== nextSourceKey) {
         sourceRunLength = 1;
       } else {
@@ -51,7 +52,7 @@ export class TextGenerator {
       sentence.push(term);
       sourceSequence.push(sourceKey);
     }
-    return {sentence : sentence.join(' '), sources : sourceSequence};
+    return {sentence: sentence, sources: sourceSequence};
   }
   pickOne<T>(array: Array<T>): T {
     return array[Math.floor(array.length * this.random())];

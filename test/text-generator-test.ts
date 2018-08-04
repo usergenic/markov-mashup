@@ -12,7 +12,7 @@ describe('TextGenerator', () => {
     qbf.addSentences(
         parser.parse('The quick brown fox jumped over the lazy dog.'));
     generator.sources.set('qbf', qbf);
-    const sentence = generator.generateSentence();
+    const sentence = generator.generateSentence().sentence.join(' ');
     expect(sentence).to.equal('The quick brown fox jumped over the lazy dog.');
   });
 
@@ -28,10 +28,10 @@ describe('TextGenerator', () => {
         parser.parse('Somewhere over the rainbow way up high...'));
     generator.sources.set('sotr', sotr);
     generator.random = () => 0;
-    expect(generator.generateSentence())
+    expect(generator.generateSentence().sentence.join(' '))
         .to.equal('The quick brown fox jumped over the rainbow way up high...');
     generator.random = () => 0.9;
-    expect(generator.generateSentence())
+    expect(generator.generateSentence().sentence.join(' '))
         .to.equal('Somewhere over the lazy dog.');
   });
 });
