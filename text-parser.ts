@@ -1,5 +1,11 @@
 
 export function isTerminal(term: string): boolean {
+  // Meant to catch all 2 and 3 letter capitalized abbreviations ending with a
+  // period, like "Dr." and "Mrs." and "Ave."
+  if (term.endsWith('.') && term[0] === term[0].toUpperCase() &&
+      term.length <= 4) {
+    return false;
+  }
   return term.endsWith('.') || term.endsWith('!') || term.endsWith('?');
 }
 

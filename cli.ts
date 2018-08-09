@@ -16,6 +16,9 @@ const sentencesToGenerate = argv.sentences || 10;
 const sourceFileNames = argv._;
 const depth = argv.depth ? parseInt(argv.depth) : 2;
 const minRunLength = argv.minrun ? parseInt(argv.minrun) : 3;
+const endRunLength = argv.endrun ? parseInt(argv.endrun) : minRunLength;
+const maxLength = argv.maxlen ? parseInt(argv.maxlen) : (minRunLength * sourceFileNames.length * 3);
+const minLength = argv.minlen ? parseInt(argv.minlen) : ((minRunLength * sourceFileNames.length - 1) + endRunLength);
 const maxTries = argv.maxtries ? parseInt(argv.maxtries) : 100;
 
 const colors =
@@ -57,6 +60,15 @@ while (sentences.length < sentencesToGenerate) {
     }
   }
   if (smallestRunLength < minRunLength) {
+    continue;
+  }
+  if (runLength < endRunLength - 1) {
+    continue;
+  }
+  if (sentence.sentence.length < minLength) {
+    continue;
+  }
+  if (sentence.sentence.length > maxLength) {
     continue;
   }
   tries = 0;
